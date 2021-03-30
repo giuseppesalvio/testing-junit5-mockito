@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="web-thymeleaf-war:war">
+    <output-path>$PROJECT_DIR$/web-thymeleaf-war/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>web-thymeleaf-war</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="mkyong.war">
+      <element id="artifact" artifact-name="web-thymeleaf-war:war exploded" />
+    </root>
+  </artifact>
+</component>
