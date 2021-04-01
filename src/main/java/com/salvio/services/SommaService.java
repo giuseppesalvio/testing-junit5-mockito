@@ -1,4 +1,4 @@
-package com.core.services;
+package com.salvio.services;
 
 import org.springframework.stereotype.Service;
 

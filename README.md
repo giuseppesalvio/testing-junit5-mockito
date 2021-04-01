@@ -1,2 +1,1 @@
-# spring-boot
-List of Spring Boot Tutorials
+# spring-boot-junit5-demo

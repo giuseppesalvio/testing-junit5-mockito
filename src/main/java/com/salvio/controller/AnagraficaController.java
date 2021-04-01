@@ -1,7 +1,7 @@
-package com.core.controller;
+package com.salvio.controller;
 
-import com.core.entitys.Anagrafica;
-import com.core.repository.AnagraficaRepository;
+import com.salvio.entitys.Anagrafica;
+import com.salvio.repository.AnagraficaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

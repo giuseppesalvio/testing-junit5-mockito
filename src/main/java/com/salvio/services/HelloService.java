@@ -1,4 +1,4 @@
-package com.core.services;
+package com.salvio.services;
 
 public interface HelloService {
 

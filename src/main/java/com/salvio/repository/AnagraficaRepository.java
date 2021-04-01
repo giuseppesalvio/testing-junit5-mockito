@@ -1,6 +1,6 @@
-package com.core.repository;
+package com.salvio.repository;
 
-import com.core.entitys.Anagrafica;
+import com.salvio.entitys.Anagrafica;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

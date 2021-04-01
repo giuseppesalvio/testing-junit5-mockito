@@ -1,4 +1,4 @@
-package com.core.repository;
+package com.salvio.repository;
 
 import org.springframework.stereotype.Repository;
 

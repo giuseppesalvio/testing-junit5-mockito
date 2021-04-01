@@ -1,6 +1,6 @@
-package com.core.services;
+package com.salvio.services;
 
-import com.core.repository.HelloRepository;
+import com.salvio.repository.HelloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

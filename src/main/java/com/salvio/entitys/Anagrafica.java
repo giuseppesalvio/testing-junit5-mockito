@@ -1,4 +1,4 @@
-package com.core.entitys;
+package com.salvio.entitys;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
