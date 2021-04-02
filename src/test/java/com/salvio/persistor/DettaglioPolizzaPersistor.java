@@ -25,4 +25,11 @@ public class DettaglioPolizzaPersistor {
         ));
         return dettaglioPolizzaList;
     }
+
+    public static List<Polizza> getListaPolizze() {
+        List<Polizza> listaPolizze = new ArrayList<>();
+        listaPolizze.add(new Polizza(1, 9999, 9999, 9999));
+        listaPolizze.add(new Polizza(2, 9999, 0000, 2222));
+        return listaPolizze;
+    }
 }

@@ -33,7 +33,7 @@ public class RicercaAnagraficheDiPolizzaService {
         ));
 
         dettaglioPolizzaList.add(new DettaglioPolizza(
-                new Polizza(2, 9999, 9999, 9999),
+                new Polizza(2, 9999, 0000, 2222),
                 new Anagrafica(9999, "Mario", "Rossi", "1234567890123456"),
                 new Anagrafica(0000, "Gennaro", "Esposito", "123123"),
                 new Anagrafica(2222, "Ciccio", "Pluto", "3333333")
