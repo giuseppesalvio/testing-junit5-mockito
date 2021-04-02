@@ -59,8 +59,8 @@ public class AnagraficaRepositoryTest {
     @Test
     public void getAll2() {
 
-        asd(5, "pinco", "pallino", "pinco13f9809a");
-        asd(6, "giuseppe", "garibaldi", "gariba13f9809a");
+        inserisciAnagrafica(5, "pinco", "pallino", "pinco13f9809a");
+        inserisciAnagrafica(6, "giuseppe", "garibaldi", "gariba13f9809a");
 
         List<Anagrafica> result = anagraficaRepository.getAll();
 
@@ -82,7 +82,23 @@ public class AnagraficaRepositoryTest {
                                 .build());
     }
 
-    private void asd(int i, String pinco, String pallino, String pinco13f9809a) {
+    @Test
+    void getByCodiceFiscale() {
+        inserisciAnagrafica(5, "pinco", "pallino", "pinco13f9809a");
+
+        Anagrafica result = anagraficaRepository.getByCodiceFiscale("pinco13f9809a");
+
+        assertThat(result)
+                .isEqualTo(
+                        Anagrafica.builder()
+                                .id(5)
+                                .nome("pinco")
+                                .cognome("pallino")
+                                .codiceFiscale("pinco13f9809a")
+                                .build());
+    }
+
+    private void inserisciAnagrafica(int i, String pinco, String pallino, String pinco13f9809a) {
         jdbcTemplate.update(
                 "INSERT INTO anagrafica (id, nome,cognome,codiceFiscale) VALUES (?, ?, ?, ?)",
                 i,
