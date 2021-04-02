@@ -20,10 +20,6 @@ public class RicercaAnagraficheDiPolizzaController {
 
     @PostMapping("/ricerca-anagrafiche-di-polizza")
     public List<DettaglioPolizza> execute(@RequestBody String codiceFiscale) {
-
-
-        List<DettaglioPolizza> lista = ricercaAnagrafichePerPolizzaService.execute(codiceFiscale);
-
-        return lista;
+        return ricercaAnagrafichePerPolizzaService.execute(codiceFiscale);
     }
 }

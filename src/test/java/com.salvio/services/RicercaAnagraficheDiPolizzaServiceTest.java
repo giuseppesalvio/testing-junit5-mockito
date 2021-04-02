@@ -1,39 +1,26 @@
-package com.salvio.controller;
+package com.salvio.services;
 
-import com.salvio.entitys.Anagrafica;
 import com.salvio.entitys.DettaglioPolizza;
-import com.salvio.entitys.Polizza;
-import com.salvio.services.RicercaAnagraficheDiPolizzaService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.salvio.persistor.DettaglioPolizzaPersistor.getListaDettaglioPolizze;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class RicercaAnagraficheDiPolizzaControllerTest {
+class RicercaAnagraficheDiPolizzaServiceTest {
 
     @InjectMocks
-    private RicercaAnagraficheDiPolizzaController ricercaAnagraficheDiPolizzaController;
-
-    @Mock
-    private RicercaAnagraficheDiPolizzaService ricercaAnagrafichePerPolizzaService;
+    private RicercaAnagraficheDiPolizzaService ricercaAnagraficheDiPolizzaService;
 
     @Test
-    void HappyPath() {
+    void execute() {
         String codiceFiscale = "1234567890123456";
 
-        List<DettaglioPolizza> listaPolizze = getListaDettaglioPolizze(codiceFiscale);
-        when(ricercaAnagrafichePerPolizzaService.execute(codiceFiscale)).thenReturn(listaPolizze);
-
-        List<DettaglioPolizza> dettaglioPolizzaList = ricercaAnagraficheDiPolizzaController.execute(codiceFiscale);
+        List<DettaglioPolizza> dettaglioPolizzaList = ricercaAnagraficheDiPolizzaService.execute(codiceFiscale);
 
         assertThat(dettaglioPolizzaList.get(0).getPolizza().getId()).isEqualTo(1);
         assertThat(dettaglioPolizzaList.get(0).getAssicurato().getCodiceFiscale()).isEqualTo(codiceFiscale);
@@ -45,5 +32,4 @@ public class RicercaAnagraficheDiPolizzaControllerTest {
         assertThat(dettaglioPolizzaList.get(1).getBeneficiario().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
         assertThat(dettaglioPolizzaList.get(1).getContraente().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
     }
-
 }
