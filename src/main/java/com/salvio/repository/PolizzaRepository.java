@@ -1,21 +1,19 @@
 package com.salvio.repository;
 
-import com.salvio.entitys.Anagrafica;
 import com.salvio.entitys.Polizza;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class PolizzaRepository {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public PolizzaRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public List<Polizza> cercaByCodiceAnagrafica(Integer idAnagrafica) {
         return jdbcTemplate.query(
