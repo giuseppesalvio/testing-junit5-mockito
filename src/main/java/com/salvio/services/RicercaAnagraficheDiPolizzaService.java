@@ -4,6 +4,7 @@ import com.salvio.entitys.Anagrafica;
 import com.salvio.entitys.DettaglioPolizza;
 import com.salvio.entitys.Polizza;
 import com.salvio.repository.AnagraficaRepository;
+import com.salvio.repository.PolizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,53 +17,37 @@ public class RicercaAnagraficheDiPolizzaService {
     @Autowired
     private final AnagraficaRepository anagraficaRepository;
 
-
-    /*
     @Autowired
     private final PolizzaRepository polizzaRepository;
-     */
 
-    public RicercaAnagraficheDiPolizzaService(AnagraficaRepository anagraficaRepository) {
+    public RicercaAnagraficheDiPolizzaService(AnagraficaRepository anagraficaRepository,PolizzaRepository polizzaRepository) {
         this.anagraficaRepository = anagraficaRepository;
+        this.polizzaRepository = polizzaRepository;
     }
+
 
     public List<DettaglioPolizza> execute(String codiceFiscale) {
 
         Anagrafica anagrafica = anagraficaRepository.ottieniAnagraficaAttraversoCodiceFiscale(codiceFiscale);
 
-        //List<Polizza> listaPolizzeAssociate=polizzaRepository.cercaByCodiceAnagrafica(anagrafica.getId());
+        List<Polizza> listaPolizzeAssociate =polizzaRepository.cercaByCodiceAnagrafica(anagrafica.getId());
 
         // questo è un commento vero e proprio listaPolizzeAssociate= [{1,9999,9999,9999},{2,9999,8888,2222}]
-        //forse si potrebbe fare un for sulla dimensione della listaPolizzeAssociate e usare l'indice del ciclo per prelevare e processare gli elementi della lista
+        //eventualmente ciclo sulla lunghezza della lista
 
-        //List<Anagrafica> anagrafichePrimaPolizza= anagraficaRepository.getListaAnagraficheAssociateAPolizza(listaPolizzeAssociate.get(0));
-        //List<Anagrafica> anagraficheSecondaPolizza= anagraficaRepository.getListaAnagraficheAssociateAPolizza(listaPolizzeAssociate.get(1));
+        List<Anagrafica> anagrafichePrimaPolizza= anagraficaRepository.getListaAnagraficheAssociateAPolizza(listaPolizzeAssociate.get(0));
+
+        List <DettaglioPolizza> dettaglioPolizzaLista = new ArrayList<>();
+        dettaglioPolizzaLista.add(new DettaglioPolizza(listaPolizzeAssociate.get(0),anagrafichePrimaPolizza.get(0),anagrafichePrimaPolizza.get(1),anagrafichePrimaPolizza.get(2)) );
 
 
-        //List <DettaglioPolizza> dettaglioPolizzaList = new ArrayList<>();
-        //dettaglioPolizzaList.add(new(listaPolizzeAssociate.get(0),anagrafichePrimaPolizza.get(0),anagrafichePrimaPolizza.get(1),anagrafichePrimaPolizza.get(2)) );
-
-        //dettaglioPolizzaList.add(new(listaPolizzeAssociate.get(1),anagraficheSecondaPolizza.get(0),anagraficheSecondaPolizza.get(1),anagraficheSecondaPolizza.get(2)) );
-
-        //return dettaglioPolizzaList;
-
+        //caso 2 polizze associate ad idAnagrafica
+       // List<Anagrafica> anagraficheSecondaPolizza= anagraficaRepository.getListaAnagraficheAssociateAPolizza(listaPolizzeAssociate.get(1));
+     // dettaglioPolizzaLista.add(new DettaglioPolizza(listaPolizzeAssociate.get(1),anagraficheSecondaPolizza.get(0),anagraficheSecondaPolizza.get(1),anagraficheSecondaPolizza.get(2)) );
 
 
 
-        List<DettaglioPolizza> dettaglioPolizzaList = new ArrayList<>();
-        dettaglioPolizzaList.add(new DettaglioPolizza(
-                new Polizza(1, 9999, 9999, 9999),
-                new Anagrafica(9999, "Mario", "Rossi", "1234567890123456"),
-                new Anagrafica(9999, "Mario", "Rossi", "1234567890123456"),
-                new Anagrafica(9999, "Mario", "Rossi", "1234567890123456")
-        ));
+        return dettaglioPolizzaLista;
 
-        dettaglioPolizzaList.add(new DettaglioPolizza(
-                new Polizza(2, 9999, 8888, 2222),
-                new Anagrafica(9999, "Mario", "Rossi", "1234567890123456"),
-                new Anagrafica(8888, "Gennaro", "Esposito", "123123"),
-                new Anagrafica(2222, "Ciccio", "Pluto", "3333333")
-        ));
-        return dettaglioPolizzaList;
     }
 }

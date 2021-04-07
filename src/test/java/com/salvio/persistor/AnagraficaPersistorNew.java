@@ -1,5 +1,9 @@
 package com.salvio.persistor;
 
+import com.salvio.entitys.Anagrafica;
+import com.salvio.entitys.Polizza;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class AnagraficaPersistorNew {
@@ -12,5 +16,20 @@ public class AnagraficaPersistorNew {
         cognome,
         codiceFiscale);
 
+  }
+
+  public static List<Anagrafica> getAnagraficheCorrelateAListaPolizzeFornita(Polizza polizzaFornita){
+
+    List<Anagrafica> listAnagraficheFigureInListaPolizzaFornita= new ArrayList<>();
+
+    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdContraente(),"mario","rossi","1234567890123456"));
+    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdAssicurato(),"mario","rossi","1234567890123456"));
+    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdBeneficiario(),"mario","rossi","1234567890123456"));
+
+
+
+
+
+    return listAnagraficheFigureInListaPolizzaFornita;
   }
 }
