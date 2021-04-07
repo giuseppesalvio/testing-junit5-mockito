@@ -1,0 +1,19 @@
+package com.salvio.entitys;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class PolizzaCollegata {
+
+        private Integer numeroPolizza;
+        private Integer idContraente;
+        private Integer idAssicurato;
+        private Integer idBeneficiario;
+
+}

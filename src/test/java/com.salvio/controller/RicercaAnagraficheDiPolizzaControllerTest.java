@@ -28,6 +28,7 @@ public class RicercaAnagraficheDiPolizzaControllerTest {
 
     @Test
     void HappyPath() {
+
         String codiceFiscale = "1234567890123456";
 
         List<DettaglioPolizza> listaPolizze = getListaDettaglioPolizze(codiceFiscale);

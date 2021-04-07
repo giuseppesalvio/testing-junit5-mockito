@@ -10,12 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.salvio.persistor.DettaglioPolizzaPersistor.getListaPolizze;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -38,7 +36,7 @@ class RicercaAnagraficheDiPolizzaServiceTest {
         Anagrafica anagraficaDelCodiceFiscale = new Anagrafica(9999, "Mario", "Rossi", "1234567890123456");
         List<Polizza> listaPolizze = getListaPolizze();
 
-        when(anagraficaRepository.getByCodiceFiscale(codiceFiscale)).thenReturn(anagraficaDelCodiceFiscale);
+        when(anagraficaRepository.ottieniAnagraficaAttraversoCodiceFiscale(codiceFiscale)).thenReturn(anagraficaDelCodiceFiscale);
         when(polizzaRepository.cercaByCodiceAnagrafica(anagraficaDelCodiceFiscale.getId())).thenReturn(listaPolizze);
 
         List<DettaglioPolizza> dettaglioPolizzaList = ricercaAnagraficheDiPolizzaService.execute(codiceFiscale);

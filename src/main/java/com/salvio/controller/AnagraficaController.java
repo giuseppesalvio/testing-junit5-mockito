@@ -25,7 +25,7 @@ public class AnagraficaController {
 
   @GetMapping("/getAll")
   public List<Anagrafica> getAll() {
-    return anagraficaRepository.getAll();
+    return anagraficaRepository.getAllAnagrafiche();
   }
 
   //TODO inserisci o modifica anagrafica a seconda se l'id è gia presente o meno
