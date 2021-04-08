@@ -12,8 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static com.salvio.persistor.AnagraficaPersistorNew.getAnagraficheCorrelateAListaPolizzeFornita;
-import static com.salvio.persistor.DettaglioPolizzaPersistor.getListaDettaglioPolizze;
+import static com.salvio.persistor.AnagraficaPersistorNew.getAnagrafiche;
+
 import static com.salvio.persistor.DettaglioPolizzaPersistor.getListaPolizze;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -35,9 +35,10 @@ class RicercaAnagraficheDiPolizzaServiceTest {
     void executeServiceTest() {
         String codiceFiscale = "1234567890123456";
 
-        Anagrafica anagraficaDelCodiceFiscale = new Anagrafica(9999, "Mario", "Rossi", "1234567890123456");
-        List<Polizza> listaPolizze = getListaPolizze();             // [{1, 9999, 9999, 9999},{ 2, 9999, 8888, 2222}]
-        List<Anagrafica> listaAnagrafiche =getAnagraficheCorrelateAListaPolizzeFornita(listaPolizze.get(0)); //[{9999,"mario","rossi","12345.."},{},{}]
+        Anagrafica anagraficaDelCodiceFiscale = new Anagrafica(9999, "Mario", "Rossi", codiceFiscale);
+        List<Polizza> listaPolizze = getListaPolizze();
+        List<Anagrafica> listaAnagrafiche = getAnagrafiche();
+
         when(anagraficaRepository.ottieniAnagraficaAttraversoCodiceFiscale(codiceFiscale)).thenReturn(anagraficaDelCodiceFiscale);
         when(polizzaRepository.cercaByCodiceAnagrafica(anagraficaDelCodiceFiscale.getId())).thenReturn(listaPolizze);
         when(anagraficaRepository.getListaAnagraficheAssociateAPolizza(listaPolizze.get(0))).thenReturn(listaAnagrafiche);

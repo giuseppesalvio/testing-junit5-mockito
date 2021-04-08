@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 public class AnagraficaProva {
-
   private Integer idAnagrafica;
   private String nome;
   private String cognome;

@@ -7,19 +7,6 @@ CREATE TABLE ANAGRAFICA (
 );
 
 
-
-
-
-CREATE TABLE ANAGRAFICAProva (
-                            idAnagrafica INT  PRIMARY KEY,
-                            nome NCHAR(20),
-                            cognome  NCHAR(20),
-                            codiceFiscale  NCHAR(20)
-);
-
-
-
-
 CREATE TABLE Polizza (
 
                           id INT  PRIMARY KEY,
@@ -27,6 +14,15 @@ CREATE TABLE Polizza (
                           idAssicurato  INT,
                           idBeneficiario INT
 );
+
+
+CREATE TABLE ANAGRAFICAProva (
+                                 idAnagrafica INT  PRIMARY KEY,
+                                 nome NCHAR(20),
+                                 cognome  NCHAR(20),
+                                 codiceFiscale  NCHAR(20)
+);
+
 
 CREATE TABLE PolizzaProva (
 

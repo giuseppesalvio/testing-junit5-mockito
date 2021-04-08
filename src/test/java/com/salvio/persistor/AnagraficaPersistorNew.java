@@ -18,18 +18,16 @@ public class AnagraficaPersistorNew {
 
   }
 
-  public static List<Anagrafica> getAnagraficheCorrelateAListaPolizzeFornita(Polizza polizzaFornita){
+  public static List<Anagrafica> getAnagrafiche(){
 
-    List<Anagrafica> listAnagraficheFigureInListaPolizzaFornita= new ArrayList<>();
-
-    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdContraente(),"mario","rossi","1234567890123456"));
-    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdAssicurato(),"mario","rossi","1234567890123456"));
-    listAnagraficheFigureInListaPolizzaFornita.add(new Anagrafica(polizzaFornita.getIdBeneficiario(),"mario","rossi","1234567890123456"));
-
+    List<Anagrafica> lista= new ArrayList<>();
+      lista.add(new Anagrafica(9999,"mario","rossi","1234567890123456"));
+      lista.add(new Anagrafica(9999,"mario","rossi","1234567890123456"));
+      lista.add(new Anagrafica(9999,"mario","rossi","1234567890123456"));
 
 
 
 
-    return listAnagraficheFigureInListaPolizzaFornita;
+    return lista;
   }
 }
