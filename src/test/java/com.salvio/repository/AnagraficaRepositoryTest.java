@@ -73,6 +73,7 @@ public class AnagraficaRepositoryTest {
     }
 
     //il test probabilmente va in rosso perchè la lista ritorna le anagrafiche in ordine di id e gli altri inseriti hanno id più alti di 5 o 6
+    //ho modificato gli indici dell' assertion su result
     @Test
     public void getAll2() {
 
@@ -91,7 +92,7 @@ public class AnagraficaRepositoryTest {
 
         List<Anagrafica> result = anagraficaRepository.getAllAnagrafiche();
 
-        assertThat(result.get(4))
+        assertThat(result.get(0))
                 .isEqualTo(
                         Anagrafica.builder()
                                 .id(5)
@@ -99,7 +100,7 @@ public class AnagraficaRepositoryTest {
                                 .cognome("pallino")
                                 .codiceFiscale("pinco13f9809a")
                                 .build());
-        assertThat(result.get(5))
+        assertThat(result.get(1))
                 .isEqualTo(
                         Anagrafica.builder()
                                 .id(6)
