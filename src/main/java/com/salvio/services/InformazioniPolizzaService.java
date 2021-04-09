@@ -34,12 +34,13 @@ public class InformazioniPolizzaService {
 
     List<DettaglioPolizzaProva> listDettaglioPolizzaProva=new ArrayList<>();
 
-    for(int i=0; i<listaPolizzeAssociateCodiceFiscale.size();i++) {
 
-      anagraficaContraente= informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(listaPolizzeAssociateCodiceFiscale.get(i).getIdContraente());
-      anagraficaAssicurato=informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(listaPolizzeAssociateCodiceFiscale.get(i).getIdAssicurato());
-      anagraficaBeneficiario=informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(listaPolizzeAssociateCodiceFiscale.get(i).getIdBeneficiario());
-      dettaglioPolizzaProva=new DettaglioPolizzaProva(listaPolizzeAssociateCodiceFiscale.get(i),anagraficaContraente,anagraficaAssicurato,anagraficaBeneficiario);
+    for (PolizzaProva polizzaProva: listaPolizzeAssociateCodiceFiscale)
+    {
+      anagraficaContraente =informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(polizzaProva.getIdContraente());
+      anagraficaAssicurato =informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(polizzaProva.getIdAssicurato());
+      anagraficaBeneficiario =informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(polizzaProva.getIdBeneficiario());
+      dettaglioPolizzaProva=new DettaglioPolizzaProva(polizzaProva,anagraficaContraente,anagraficaAssicurato,anagraficaBeneficiario);
       listDettaglioPolizzaProva.add(dettaglioPolizzaProva);
     }
 
