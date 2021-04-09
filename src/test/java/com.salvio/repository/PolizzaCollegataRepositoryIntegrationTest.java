@@ -1,7 +1,6 @@
 package com.salvio.repository;
 
 import com.salvio.StartApplication;
-import com.salvio.entitys.PolizzaCollegata;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
