@@ -8,13 +8,11 @@ import static sun.misc.Version.print;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.salvio.StartApplication;
-import com.salvio.entitys.DettaglioPolizza;
 import com.salvio.entitys.DettaglioPolizzaProva;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -66,13 +64,17 @@ public class InformazioniDettaglioPolizzaE2E {
 
     List<DettaglioPolizzaProva> dettaglioPolizzaTrasformatoDaJsonString = gson.fromJson(stringJsonResult, list);
 
-
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.size()).isEqualTo(2);
     assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getPolizza().getNumeroPolizza()).isEqualTo(1);
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getContraente().getCodiceFiscale()).isEqualTo(codiceFiscale);
     assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getAssicurato().getCodiceFiscale()).isEqualTo(codiceFiscale);
     assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getBeneficiario().getCodiceFiscale()).isEqualTo(codiceFiscale);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getContraente().getCodiceFiscale()).isEqualTo(codiceFiscale);
 
 
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getPolizza().getNumeroPolizza()).isEqualTo(2);
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getContraente().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getAssicurato().getCodiceFiscale()).isEqualTo(codiceFiscale);
+    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getBeneficiario().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
 
 
 
