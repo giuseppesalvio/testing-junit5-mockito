@@ -37,17 +37,13 @@ public class VerificaCompatibilitaSinistroECalcoloPremioE2E {
     String infoSinistro = "";
     try {
       JSONObject jsonObject = new JSONObject();
-      JSONArray jsonArray = new JSONArray();
-      JSONObject item = new JSONObject();
       jsonObject.put("targaA", "CE653TN");
       jsonObject.put("targaB", "FL041PB");
       jsonObject.put("assicurazioneA", "01333550323");     //P.IVA GENERALI
       jsonObject.put("assicurazioneB", "03740811207");     //P.IVA ARCA
+      jsonObject.put("dataSinistro", "12-04-2021");
 
-      item.put("giorno", "12/04/2021");
-      item.put("ora", "14:00:00");
-      jsonArray.put(item);
-      jsonObject.put("dataSinistro", jsonArray);
+
       infoSinistro = jsonObject.toString();
     }
     catch(JSONException e){

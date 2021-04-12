@@ -2,10 +2,12 @@ package com.salvio.services;
 
 import static org.mockito.Mockito.when;
 
+import com.google.gson.Gson;
 import com.salvio.entitys.AnagraficaEstesa;
 import com.salvio.entitys.Automobile;
 import com.salvio.entitys.InfoPolizzaEstesa;
 import com.salvio.entitys.PolizzaEstesa;
+import com.salvio.entitys.Sinistro;
 import com.salvio.repository.AnagraficaEstesaRepository;
 import com.salvio.repository.AutomobileRepository;
 import com.salvio.repository.PolizzaEstesaRepository;
@@ -36,24 +38,25 @@ public class CompatibilitaSinistroServiceUnitTest {
   @Test
   public void controlloValiditaSinistroServiceTest() {
     String infoSinistro = "";
-
     try {
       JSONObject jsonObject = new JSONObject();
-      JSONArray jsonArray = new JSONArray();
-      JSONObject item = new JSONObject();
       jsonObject.put("targaA", "CE653TN");
       jsonObject.put("targaB", "FL041PB");
       jsonObject.put("assicurazioneA", "01333550323");     //P.IVA GENERALI
       jsonObject.put("assicurazioneB", "03740811207");     //P.IVA ARCA
+      jsonObject.put("dataSinistro", "12-04-2021");
 
-      item.put("giorno", "12/04/2021");
-      item.put("ora", "14:00:00");
-      jsonArray.put(item);
-      jsonObject.put("dataSinistro", jsonArray);
+
       infoSinistro = jsonObject.toString();
-    } catch (JSONException e) {
+    }
+    catch(JSONException e){
       System.out.println("ERRORE SULLA COMPOSIZIONE JSON");
     }
+
+
+    String targaDaVerificare="CE653TN";
+
+
     Automobile automobileProva = Automobile.builder().numeroTarga("CE653TN").codiceFiscaleProprietario("cstmnl")
         .P_IvaAssicurazioneAssociata("01333550323").numeroPolizzaAssociata(1).build();
     PolizzaEstesa polizzaEstesaProva = PolizzaEstesa.builder().numeroPolizza(1).idContraente(9797).idAssicurato(9797)
@@ -70,7 +73,9 @@ public class CompatibilitaSinistroServiceUnitTest {
     listaPolizzeAssociateProva.add(PolizzaEstesa.builder().numeroPolizza(5).idContraente(9797).idAssicurato(2222)
         .idBeneficiario(9999).dataProxQuietanzamento("01/06/2021").importoQuietanzamento(500.00).build());
 
-    when(automobileRepository.verificaValiditaSinistroEdEstraiNumeroPolizza(infoSinistro)).thenReturn(automobileProva);
+    int totalePremioDaVersare=1000;
+
+    when(automobileRepository.verificaValiditaSinistroEdEstraiNumeroPolizza(targaDaVerificare)).thenReturn(automobileProva);
 
     when(polizzaEstesaRepository.estraiDatiPolizzaFornita(automobileProva.getNumeroPolizzaAssociata()))
         .thenReturn(polizzaEstesaProva);
@@ -81,11 +86,15 @@ public class CompatibilitaSinistroServiceUnitTest {
 
     when(polizzaEstesaRepository.ottieniPolizzeConContraenteIdFornito(anagraficaEstesa.getIdAnagrafica()))
         .thenReturn(listaPolizzeAssociateProva);
+
+
+
     InfoPolizzaEstesa infoPolizzaEstesa = validitàSinistroService.executeOperazioniService(infoSinistro);
 
 
-    //Assertions.assertThat(infoPolizzaEstesa.getTotalePremioDaVersare()).isEqualTo(1000);
-    //Assertions.assertThat(infoPolizzaEstesa.getListaPolizzeCollegate().size()).isEqualTo(2);
+
+  Assertions.assertThat(infoPolizzaEstesa.getTotalePremioDaVersare()).isEqualTo(1000);
+  Assertions.assertThat(infoPolizzaEstesa.getListaPolizzeCollegate().size()).isEqualTo(2);
 
   }
 
