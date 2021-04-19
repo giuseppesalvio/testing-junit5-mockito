@@ -24,21 +24,7 @@ public class AutomobileRepositoryIntegrationTest {
 
   @Test
   public void controlloEstraiDatiDaAutoRepo() {
-    String infoSinistro = "";
-    try {
-      JSONObject jsonObject = new JSONObject();
-      jsonObject.put("targaA", "CE653TN");
-      jsonObject.put("targaB", "FL041PB");
-      jsonObject.put("assicurazioneA", "01333550323");     //P.IVA GENERALI
-      jsonObject.put("assicurazioneB", "03740811207");     //P.IVA ARCA
-      jsonObject.put("dataSinistro", "12-04-2021");
 
-
-      infoSinistro = jsonObject.toString();
-    }
-    catch(JSONException e){
-      System.out.println("ERRORE SULLA COMPOSIZIONE JSON");
-    }
     jdbcTemplate.update(
         "insert into automobile(numeroTarga,codiceFiscaleProprietario,P_IvaAssicurazioneAssociata,numeroPolizzaAssociata) values('CE653TN','cstmnl','01333550323',1)");
 

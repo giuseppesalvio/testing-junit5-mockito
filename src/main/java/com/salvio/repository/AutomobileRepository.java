@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AutomobileRepository {
 
-  private JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
 
   public AutomobileRepository(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;

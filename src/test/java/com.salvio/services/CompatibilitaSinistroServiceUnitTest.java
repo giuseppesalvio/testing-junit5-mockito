@@ -11,7 +11,10 @@ import com.salvio.entitys.Sinistro;
 import com.salvio.repository.AnagraficaEstesaRepository;
 import com.salvio.repository.AutomobileRepository;
 import com.salvio.repository.PolizzaEstesaRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.json.JSONArray;
@@ -44,7 +47,7 @@ public class CompatibilitaSinistroServiceUnitTest {
       jsonObject.put("targaB", "FL041PB");
       jsonObject.put("assicurazioneA", "01333550323");     //P.IVA GENERALI
       jsonObject.put("assicurazioneB", "03740811207");     //P.IVA ARCA
-      jsonObject.put("dataSinistro", "12-04-2021");
+      jsonObject.put("dataSinistro", "2021-04-12");
 
 
       infoSinistro = jsonObject.toString();
@@ -54,13 +57,28 @@ public class CompatibilitaSinistroServiceUnitTest {
     }
 
 
-    String targaDaVerificare="CE653TN";
+    String targaDaVerificare = "CE653TN";
+    String dataProxQuietanz = "2021-06-01";
+    boolean flag=false;
+    try {
+      Gson gson = new Gson();
+      Sinistro jsonSinistro = gson.fromJson(infoSinistro, Sinistro.class);
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      Date dataSinistro = sdf.parse(jsonSinistro.getDataSinistro());
+      Date dataValiditaPolizza = sdf.parse(dataProxQuietanz);
+      if(dataSinistro.before(dataValiditaPolizza)){
+        flag=true;
+      }
+
+    }
+    catch(ParseException e ){System.out.println("DATA INVALIDA");}
+
 
 
     Automobile automobileProva = Automobile.builder().numeroTarga("CE653TN").codiceFiscaleProprietario("cstmnl")
         .P_IvaAssicurazioneAssociata("01333550323").numeroPolizzaAssociata(1).build();
     PolizzaEstesa polizzaEstesaProva = PolizzaEstesa.builder().numeroPolizza(1).idContraente(9797).idAssicurato(9797)
-        .idBeneficiario(9797).dataProxQuietanzamento("01/06/2021").importoQuietanzamento(500.00).build();
+        .idBeneficiario(9797).dataProxQuietanzamento("2021-06-01").importoQuietanzamento(500.00).build();
 
     AnagraficaEstesa anagraficaEstesa = AnagraficaEstesa.builder().idAnagrafica(9797).nome("emanuele").cognome("castagnaro")
         .codiceFiscale("cstmnl").build();
@@ -68,10 +86,10 @@ public class CompatibilitaSinistroServiceUnitTest {
     List<PolizzaEstesa> listaPolizzeAssociateProva = new ArrayList<>();
 
     listaPolizzeAssociateProva.add(PolizzaEstesa.builder().numeroPolizza(1).idContraente(9797).idAssicurato(9797)
-        .idBeneficiario(9797).dataProxQuietanzamento("01/06/2021").importoQuietanzamento(500.00).build());
+        .idBeneficiario(9797).dataProxQuietanzamento("2021-06-01").importoQuietanzamento(500.00).build());
 
     listaPolizzeAssociateProva.add(PolizzaEstesa.builder().numeroPolizza(5).idContraente(9797).idAssicurato(2222)
-        .idBeneficiario(9999).dataProxQuietanzamento("01/06/2021").importoQuietanzamento(500.00).build());
+        .idBeneficiario(9999).dataProxQuietanzamento("2021-06-01").importoQuietanzamento(500.00).build());
 
     int totalePremioDaVersare=1000;
 
@@ -93,8 +111,8 @@ public class CompatibilitaSinistroServiceUnitTest {
 
 
 
-  Assertions.assertThat(infoPolizzaEstesa.getTotalePremioDaVersare()).isEqualTo(1000);
-  Assertions.assertThat(infoPolizzaEstesa.getListaPolizzeCollegate().size()).isEqualTo(2);
+   Assertions.assertThat(infoPolizzaEstesa.getTotalePremioDaVersare()).isEqualTo(totalePremioDaVersare);
+   Assertions.assertThat(infoPolizzaEstesa.getListaPolizzeCollegate().size()).isEqualTo(2);
 
   }
 

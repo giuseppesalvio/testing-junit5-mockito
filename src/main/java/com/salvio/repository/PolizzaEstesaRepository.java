@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PolizzaEstesaRepository {
 
-  private JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
 
   public PolizzaEstesaRepository(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;

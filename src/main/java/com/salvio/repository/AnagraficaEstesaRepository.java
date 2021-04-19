@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AnagraficaEstesaRepository {
 
-  private JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
 
   public AnagraficaEstesaRepository(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;

@@ -68,7 +68,7 @@ public class InformazioniDettaglioPolizzaControllerTest {
 
 
 
-    when(informazioniPolizzaService.estraiEProcessaInformazioni(codiceFiscale)).thenReturn(listaExpected);
+    when(informazioniPolizzaService.getDettaglioPolizza(codiceFiscale)).thenReturn(listaExpected);
 
     List<DettaglioPolizzaProva> lista = informazioniPolizzaController.gestisciEndpoint(codiceFiscale);
 

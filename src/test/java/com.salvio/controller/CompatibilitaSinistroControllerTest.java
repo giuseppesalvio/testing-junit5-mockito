@@ -34,7 +34,7 @@ public class CompatibilitaSinistroControllerTest {
       jsonObject.put("targaB", "FL041PB");
       jsonObject.put("assicurazioneA", "01333550323");     //P.IVA GENERALI
       jsonObject.put("assicurazioneB", "03740811207");     //P.IVA ARCA
-      jsonObject.put("dataSinistro", "12-04-2021");
+      jsonObject.put("dataSinistro", "2021-04-12");
 
 
       infoSinistro = jsonObject.toString();
@@ -45,11 +45,11 @@ public class CompatibilitaSinistroControllerTest {
     List<PolizzaEstesa> listaPolizzeEsteseProva = new ArrayList<>();
     listaPolizzeEsteseProva.add(
         PolizzaEstesa.builder().numeroPolizza(1).idContraente(9999).idAssicurato(9999).idBeneficiario(9999)
-            .dataProxQuietanzamento("01/06/2021").importoQuietanzamento(500.01).build()
+            .dataProxQuietanzamento("2021-06-01").importoQuietanzamento(500.00).build()
     );
     listaPolizzeEsteseProva.add(
         PolizzaEstesa.builder().numeroPolizza(2).idContraente(9999).idAssicurato(2222).idBeneficiario(2222)
-            .dataProxQuietanzamento("01/06/2021").importoQuietanzamento(499.99).build()
+            .dataProxQuietanzamento("2021-06-01").importoQuietanzamento(500.00).build()
     );
 
     int totaleDaVersareProva = 1000;

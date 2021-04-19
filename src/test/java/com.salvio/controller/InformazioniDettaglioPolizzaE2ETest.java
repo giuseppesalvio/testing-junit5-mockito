@@ -1,5 +1,6 @@
 package com.salvio.controller;
 
+import static com.salvio.persistor.PolizzaProvaPersistor.inserisciPolizzaProva;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -8,9 +9,12 @@ import static sun.misc.Version.print;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.salvio.StartApplication;
+import com.salvio.entitys.AnagraficaProva;
 import com.salvio.entitys.DettaglioPolizzaProva;
 import com.salvio.entitys.Polizza;
 import com.salvio.entitys.PolizzaProva;
+import com.salvio.repository.AnagraficaRepositoryProva;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -31,31 +35,54 @@ public class InformazioniDettaglioPolizzaE2ETest {
   private MockMvc mvc;
 
   @Autowired
-  private JdbcTemplate jdbcTemplate;
+  public JdbcTemplate jdbcTemplate;
 
+  @Autowired
+  private AnagraficaRepositoryProva anagraficaRepositoryProva;
 
   @Test
   public void controllerFunzionamentoOk() throws Exception {
 
-    String codiceFiscale = "123456";
+    AnagraficaProva anagraficaProva = new AnagraficaProva(9999, "mario", "rossi", "123456");
+    inserisciAnagraficaProva(anagraficaProva);
+    inserisciAnagraficaProva(new AnagraficaProva(8888, "gennaro", "esposito", "gnnsps"));
+    inserisciAnagraficaProva(new AnagraficaProva(2222, "pippo", "pluto", "pppplt"));
 
-    jdbcTemplate
-        .update("insert into anagraficaProva(idAnagrafica,nome,cognome,codiceFiscale) values(9999,'mario','rossi','123456')");
-    jdbcTemplate.update(
-        "insert into anagraficaProva(idAnagrafica,nome,cognome,codiceFiscale) values(8888,'gennaro','esposito','gnnsps')");
-    jdbcTemplate
-        .update("insert into anagraficaProva(idAnagrafica,nome,cognome,codiceFiscale) values(2222,'pippo','pluto','pppplt')");
+    inserisciPolizzaProva(jdbcTemplate,new PolizzaProva(1, 9999, 9999, 9999));
+    inserisciPolizzaProva(jdbcTemplate,new PolizzaProva(2, 8888, 9999, 2222));
+    inserisciPolizzaProva(jdbcTemplate,new PolizzaProva(3, 2222, 2222, 8888));
 
-    jdbcTemplate
-        .update("insert into polizzaProva(numeroPolizza,idContraente,idAssicurato,idBeneficiario) values(1,9999,9999,9999)");
-    jdbcTemplate
-        .update("insert into polizzaProva(numeroPolizza,idContraente,idAssicurato,idBeneficiario) values(2,8888,9999,2222)");
-    jdbcTemplate
-        .update("insert into polizzaProva(numeroPolizza,idContraente,idAssicurato,idBeneficiario) values(3,2222,2222,8888)");
-
-    ResultActions resultActions = mvc.perform(post("/get-informazioni-dettaglio-polizza").content(codiceFiscale))
+    ResultActions resultActions = mvc
+        .perform(post("/get-informazioni-dettaglio-polizza").content(anagraficaProva.getCodiceFiscale()))
         .andExpect(status().isOk());
 
+    List<DettaglioPolizzaProva> listaDettaglioPolizzaProva = getDettaglioPolizzaProva(resultActions);
+
+    assertThat(listaDettaglioPolizzaProva.size()).isEqualTo(2);
+    assertThat(listaDettaglioPolizzaProva.get(0).getPolizza().getNumeroPolizza()).isEqualTo(1);
+    assertThat(listaDettaglioPolizzaProva.get(0).getContraente().getCodiceFiscale())
+        .isEqualTo(anagraficaProva.getCodiceFiscale());
+    assertThat(listaDettaglioPolizzaProva.get(0).getAssicurato().getCodiceFiscale())
+        .isEqualTo(anagraficaProva.getCodiceFiscale());
+    assertThat(listaDettaglioPolizzaProva.get(0).getBeneficiario().getCodiceFiscale())
+        .isEqualTo(anagraficaProva.getCodiceFiscale());
+
+    assertThat(listaDettaglioPolizzaProva.get(1).getPolizza().getNumeroPolizza()).isEqualTo(2);
+    assertThat(listaDettaglioPolizzaProva.get(1).getContraente().getCodiceFiscale())
+        .isNotEqualTo(anagraficaProva.getCodiceFiscale());
+    assertThat(listaDettaglioPolizzaProva.get(1).getAssicurato().getCodiceFiscale())
+        .isEqualTo(anagraficaProva.getCodiceFiscale());
+    assertThat(listaDettaglioPolizzaProva.get(1).getBeneficiario().getCodiceFiscale())
+        .isNotEqualTo(anagraficaProva.getCodiceFiscale());
+
+
+  }
+
+  private void inserisciAnagraficaProva(AnagraficaProva anagraficaProva) {
+    anagraficaRepositoryProva.insert(anagraficaProva);
+  }
+
+  private List<DettaglioPolizzaProva> getDettaglioPolizzaProva(ResultActions resultActions) throws UnsupportedEncodingException {
     String stringJsonResultDettaglioPolizza = resultActions.andReturn().getResponse().getContentAsString();
 
     Gson gson = new Gson();
@@ -65,20 +92,10 @@ public class InformazioniDettaglioPolizzaE2ETest {
 
     List<DettaglioPolizzaProva> dettaglioPolizzaTrasformatoDaJsonString = gson
         .fromJson(stringJsonResultDettaglioPolizza, listDettaglioPolizzaProva);
-
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.size()).isEqualTo(2);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getPolizza().getNumeroPolizza()).isEqualTo(1);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getContraente().getCodiceFiscale()).isEqualTo(codiceFiscale);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getAssicurato().getCodiceFiscale()).isEqualTo(codiceFiscale);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(0).getBeneficiario().getCodiceFiscale()).isEqualTo(codiceFiscale);
-
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getPolizza().getNumeroPolizza()).isEqualTo(2);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getContraente().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getAssicurato().getCodiceFiscale()).isEqualTo(codiceFiscale);
-    assertThat(dettaglioPolizzaTrasformatoDaJsonString.get(1).getBeneficiario().getCodiceFiscale()).isNotEqualTo(codiceFiscale);
-
-
+    return dettaglioPolizzaTrasformatoDaJsonString;
   }
+
+
 
   @Test
   public void controlloFunzionamentoNuoveFunzionalitaOk() throws Exception {

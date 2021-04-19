@@ -3,7 +3,6 @@ package com.salvio.services;
 import static org.mockito.Mockito.when;
 
 import com.salvio.entitys.AnagraficaProva;
-import com.salvio.entitys.DettaglioPolizza;
 import com.salvio.entitys.DettaglioPolizzaProva;
 import com.salvio.entitys.PolizzaProva;
 import com.salvio.repository.InformazioniAnagraficaRepository;
@@ -30,7 +29,7 @@ public class InformazioniDettaglioPolizzaServiceTest {
   @Test
   public void controlloExecuteService() {
     String codiceFiscale = "123456";
-    AnagraficaProva anagraficaProva = AnagraficaProva.builder().idAnagrafica(9999).codiceFiscale("123456").build();
+    AnagraficaProva anagraficaProva = AnagraficaProva.builder().idAnagrafica(9999).nome("mario").cognome("rossi").codiceFiscale("123456").build();
     List<PolizzaProva> listaPolizzeDefault = new ArrayList<>();
     listaPolizzeDefault.add(new PolizzaProva(1, 9999, 9999, 9999));
     listaPolizzeDefault.add(new PolizzaProva(2, 8888, 9999, 2222));
@@ -62,7 +61,7 @@ public class InformazioniDettaglioPolizzaServiceTest {
 
 
     List<DettaglioPolizzaProva> listaDettaglioFornitaDalService = informazioniPolizzaService
-        .estraiEProcessaInformazioni(codiceFiscale);
+        .getDettaglioPolizza(codiceFiscale);
 
 
 

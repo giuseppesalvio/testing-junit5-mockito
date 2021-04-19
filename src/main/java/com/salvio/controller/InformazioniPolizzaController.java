@@ -6,11 +6,7 @@ import com.salvio.entitys.Operazioni;
 import com.salvio.entitys.PolizzaProva;
 import com.salvio.services.InformazioniPolizzaService;
 import com.salvio.services.OperazioniService;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +30,7 @@ public class InformazioniPolizzaController {
   @PostMapping("/get-informazioni-dettaglio-polizza")
   public List<DettaglioPolizzaProva> gestisciEndpoint(@RequestBody String codiceFiscale) {
 
-      return informazioniPolizzaService.estraiEProcessaInformazioni(codiceFiscale);
+      return informazioniPolizzaService.getDettaglioPolizza(codiceFiscale);
   }
 
 
