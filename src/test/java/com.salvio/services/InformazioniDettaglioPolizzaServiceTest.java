@@ -58,12 +58,8 @@ public class InformazioniDettaglioPolizzaServiceTest {
     when(informazioniAnagraficaRepository.getAnagraficheDaIdAnagrafica(2222))
         .thenReturn(listaAnagraficheDefault.get(2));
 
-
-
     List<DettaglioPolizzaProva> listaDettaglioFornitaDalService = informazioniPolizzaService
         .getDettaglioPolizza(codiceFiscale);
-
-
 
     //verifico che mi siano restituite
     Assertions.assertThat(listaDettaglioFornitaDalService.size()).isEqualTo(2);

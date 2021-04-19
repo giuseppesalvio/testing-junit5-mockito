@@ -9,23 +9,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DettaglioPolizzaMapping {
 
-  private InformazioniAnagraficaRepository informazioniAnagraficaRepository;
+    private final InformazioniAnagraficaRepository informazioniAnagraficaRepository;
 
-  public DettaglioPolizzaMapping(InformazioniAnagraficaRepository informazioniAnagraficaRepository) {
-    this.informazioniAnagraficaRepository = informazioniAnagraficaRepository;
-  }
+    public DettaglioPolizzaMapping(InformazioniAnagraficaRepository informazioniAnagraficaRepository) {
+        this.informazioniAnagraficaRepository = informazioniAnagraficaRepository;
+    }
 
+    public DettaglioPolizzaProva execute(PolizzaProva polizzaProva) {
 
-  public DettaglioPolizzaProva execute(PolizzaProva polizzaProva) {
-
-    AnagraficaProva anagraficaContraente = informazioniAnagraficaRepository
-        .getAnagraficheDaIdAnagrafica(polizzaProva.getIdContraente());
-    AnagraficaProva anagraficaAssicurato = informazioniAnagraficaRepository
-        .getAnagraficheDaIdAnagrafica(polizzaProva.getIdAssicurato());
-    AnagraficaProva anagraficaBeneficiario = informazioniAnagraficaRepository
-        .getAnagraficheDaIdAnagrafica(polizzaProva.getIdBeneficiario());
-    DettaglioPolizzaProva dettaglioPolizzaProva = new DettaglioPolizzaProva(polizzaProva, anagraficaContraente,
-        anagraficaAssicurato, anagraficaBeneficiario);
-    return dettaglioPolizzaProva;
-  }
+        AnagraficaProva anagraficaContraente = informazioniAnagraficaRepository
+                .getAnagraficheDaIdAnagrafica(polizzaProva.getIdContraente());
+        AnagraficaProva anagraficaAssicurato = informazioniAnagraficaRepository
+                .getAnagraficheDaIdAnagrafica(polizzaProva.getIdAssicurato());
+        AnagraficaProva anagraficaBeneficiario = informazioniAnagraficaRepository
+                .getAnagraficheDaIdAnagrafica(polizzaProva.getIdBeneficiario());
+        DettaglioPolizzaProva dettaglioPolizzaProva = new DettaglioPolizzaProva(polizzaProva, anagraficaContraente,
+                anagraficaAssicurato, anagraficaBeneficiario);
+        return dettaglioPolizzaProva;
+    }
 }
