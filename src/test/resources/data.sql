@@ -80,3 +80,70 @@ create table anagraficaEstesa(
                               codiceFiscale         nchar(20)
 
 );
+
+
+
+create table riepilogoAnagrafica(
+
+
+                                 idAnagrafica     int primary Key,
+                                 nome         nchar(20),
+                                 cognome          nchar(20),
+                                 codiceFiscale         nchar(20)
+
+);
+
+Create table riepilogoAutomobile
+(
+    numeroTarga nchar primary key,
+    codiceFiscaleProprietario nchar(16),
+    codiceAssicurazione nchar(20),
+    numeroPolizzaAssociata int
+);
+
+
+create table riepilogoPolizza(
+                              numeroPolizza int primary Key,
+                              idContraente int,
+                              idAssicurato  int ,
+                              idBeneficiario int ,
+                              dataProxQuietanzamento nchar(10) ,
+                              importoQuietanzamento double
+
+);
+
+create table Azienda(
+
+    codiceAzienda nchar(10) primary key,
+    nomeAzienda nchar(20),
+    codiceFiscaleProprietarioAzienda nchar(10),
+    dataFondazione nchar(10),
+    nazione nchar(20)
+
+);
+
+create table Dipendente(
+
+     idDipendente Integer primary Key,
+     codiceAzienda nchar(10) not null,
+     ruolo nchar(15),
+     dataAssunzione nchar(10),
+     stipendio DOUBLE
+
+
+
+
+);
+
+
+create table AnagraficaAziende(
+
+
+                                    idAnagrafica     int primary Key,
+                                    nome         nchar(20),
+                                    cognome          nchar(20),
+                                    codiceFiscale         nchar(20)
+
+);
+
+
