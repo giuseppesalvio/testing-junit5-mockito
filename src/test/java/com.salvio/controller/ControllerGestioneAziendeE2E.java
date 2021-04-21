@@ -8,10 +8,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.salvio.Response.AziendaAssociataResponse;
 import com.salvio.Response.DipendentiAziendaResponse;
 import com.salvio.StartApplication;
 import com.salvio.persistor.AziendaPersistor;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,22 +66,26 @@ public class ControllerGestioneAziendeE2E {
     ResultActions resultActionsAziende = mockmvc.perform(post("/getAziendeAssociateA").content(codiceFiscale)).andDo(print())
         .andExpect(status().isOk());
 
-    String jsonStringResponseDipendenti = resultActionsDipendenti.andReturn().getResponse().getContentAsString();
+    String jsonResponseDipendenti = resultActionsDipendenti.andReturn().getResponse().getContentAsString();
 
-    String jsonStringResponseAziende = resultActionsAziende.andReturn().getResponse().getContentAsString();
+    String jsonResponseAziende = resultActionsAziende.andReturn().getResponse().getContentAsString();
 
     Gson gson = new Gson();
 
-    List<DipendentiAziendaResponse> listaDipendenti = gson.fromJson(jsonStringResponseDipendenti, ArrayList.class);
+    //modo per deserializzare un json string in una lista di oggetti
+    Type listaDipendentiAziendaResponse = new TypeToken<ArrayList<DipendentiAziendaResponse>>() {}.getType();
+    List<DipendentiAziendaResponse> listaDipendenti=gson.fromJson(jsonResponseDipendenti,listaDipendentiAziendaResponse);
 
-    List<AziendaAssociataResponse> listaAziende = gson.fromJson(jsonStringResponseAziende, ArrayList.class);
+
+    Type listaAziendaAssociataResponse= new TypeToken<ArrayList<AziendaAssociataResponse>>() {}.getType();
+    List<AziendaAssociataResponse> listaAziende=gson.fromJson(jsonResponseAziende,listaAziendaAssociataResponse ) ;
 
     Assertions.assertThat(listaDipendenti.size()).isEqualTo(numeroDiDipendentiAspettato);
 
     Assertions.assertThat(listaAziende.size()).isEqualTo(numeroAziendeAspettato);
 
-    //mi da un classCastException
-    //Assertions.assertThat(listaAziende.get(0).getMonteStipendiTotale()).isEqualTo(4000.00);
+
+    Assertions.assertThat(listaAziende.get(0).getMonteStipendiTotale()).isEqualTo(4000.00);
 
 
   }

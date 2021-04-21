@@ -32,6 +32,9 @@ public class GestioneAziendeServiceUnitTest {
 
     String codiceAzienda = "A0001";
     List<Dipendente> listaDipendentiMock = new ArrayList<>();
+
+
+
     listaDipendentiMock.add(
         Dipendente.builder().idDipendente(9797).codiceAzienda("A0001").ruolo("developer").dataAssunzione("2021-03-01")
             .stipendio(1000.00).build());
@@ -50,6 +53,8 @@ public class GestioneAziendeServiceUnitTest {
 
     AnagraficaAzienda anagraficaAzienda3 =
         AnagraficaAzienda.builder().idAnagrafica(8888).nome("gennaro").cognome("esposito").codiceFiscale("gnnsps").build();
+
+
 
     when(gestioneDipendentiRepository.getListaDipendentiBy(codiceAzienda)).thenReturn(listaDipendentiMock);
     when(gestioneAnagraficheRepository.getAnagraficaBy(9797)).thenReturn(anagraficaAzienda1);
