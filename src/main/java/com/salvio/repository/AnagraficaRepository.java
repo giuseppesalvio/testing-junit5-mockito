@@ -72,4 +72,7 @@ public class AnagraficaRepository {
 
     }
 
+    public List<Anagrafica> getAllAnagrafiche(int id) {
+        return null;
+    }
 }

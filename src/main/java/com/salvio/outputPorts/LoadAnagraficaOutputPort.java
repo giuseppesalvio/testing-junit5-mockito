@@ -1,6 +1,6 @@
 package com.salvio.outputPorts;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.AnagraficaDomain;
 
 public interface LoadAnagraficaOutputPort {
 

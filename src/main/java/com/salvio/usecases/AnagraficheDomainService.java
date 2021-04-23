@@ -1,6 +1,6 @@
-package com.salvio.UseCases;
+package com.salvio.usecases;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.AnagraficaDomain;
 import com.salvio.inputPorts.AnagraficheDomainUseCase;
 import com.salvio.outputPorts.LoadAnagraficaOutputPort;
 import lombok.RequiredArgsConstructor;

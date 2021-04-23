@@ -2,8 +2,8 @@ package com.salvio.controller;
 
 import static org.mockito.Mockito.when;
 
-import com.salvio.Response.AziendaAssociataResponse;
-import com.salvio.Response.DipendentiAziendaResponse;
+import com.salvio.response.AziendaAssociataResponse;
+import com.salvio.response.DipendentiAziendaResponse;
 import com.salvio.services.GestioneAziendeService;
 import com.salvio.services.GestioneDipendentiService;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.salvio.services;
 
 import static org.mockito.Mockito.when;
 
-import com.salvio.Response.AziendaAssociataResponse;
+import com.salvio.response.AziendaAssociataResponse;
 import com.salvio.entitys.AnagraficaAzienda;
 import com.salvio.entitys.Dipendente;
 import com.salvio.entitys.Azienda;

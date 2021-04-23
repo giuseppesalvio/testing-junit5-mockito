@@ -1,9 +1,6 @@
 package com.salvio.inputPorts;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
-import com.sun.istack.NotNull;
-import lombok.EqualsAndHashCode;
-import lombok.Value;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.AnagraficaDomain;
 
 public interface AnagraficheDomainUseCase {
 

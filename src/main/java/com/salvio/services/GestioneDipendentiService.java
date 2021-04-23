@@ -1,6 +1,6 @@
 package com.salvio.services;
 
-import com.salvio.Response.AziendaAssociataResponse;
+import com.salvio.response.AziendaAssociataResponse;
 import com.salvio.entitys.AnagraficaAzienda;
 import com.salvio.entitys.Azienda;
 import com.salvio.entitys.Dipendente;

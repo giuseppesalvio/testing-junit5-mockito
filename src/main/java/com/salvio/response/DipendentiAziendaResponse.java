@@ -1,6 +1,5 @@
-package com.salvio.Response;
+package com.salvio.response;
 
-import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

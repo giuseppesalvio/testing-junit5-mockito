@@ -1,7 +1,6 @@
-package com.salvio.UseCases;
+package com.salvio.usecases;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.PolizzaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.PolizzaDomain;
 import com.salvio.inputPorts.PolizzeAssociateDomainUseCase;
 import com.salvio.outputPorts.LoadPolizzaOutputPort;
 import java.util.ArrayList;

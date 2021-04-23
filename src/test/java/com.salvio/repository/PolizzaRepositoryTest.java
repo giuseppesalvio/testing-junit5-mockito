@@ -35,6 +35,8 @@ class PolizzaRepositoryTest {
 
 
     assertThat(listaPolizze.size()).isEqualTo(2);
+    assertThat(listaPolizze.get(0)).isEqualTo(new Polizza(1, 9999, 9999, 9999));
+    assertThat(listaPolizze.get(1)).isEqualTo(new Polizza(2, 9999, 8888, 2222));
   }
 
 

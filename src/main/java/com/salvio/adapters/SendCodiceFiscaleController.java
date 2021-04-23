@@ -1,7 +1,7 @@
-package com.salvio.Adapters;
+package com.salvio.adapters;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.PolizzaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.AnagraficaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.PolizzaDomain;
 import com.salvio.inputPorts.AnagraficheDomainUseCase;
 import com.salvio.inputPorts.PolizzeAssociateDomainUseCase;
 import java.util.List;

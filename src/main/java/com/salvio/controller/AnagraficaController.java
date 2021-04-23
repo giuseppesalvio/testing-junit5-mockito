@@ -34,4 +34,11 @@ public class AnagraficaController {
     return new Anagrafica();
   }
 
+  public List<Anagrafica> getAllTestTdd() {
+    return anagraficaRepository.getAllAnagrafiche();
+  }
+
+  public List<Anagrafica> getAllTestTdd(int i) {
+    return anagraficaRepository.getAllAnagrafiche(i);
+  }
 }

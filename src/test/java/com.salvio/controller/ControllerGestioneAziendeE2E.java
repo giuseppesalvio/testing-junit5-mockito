@@ -9,13 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.salvio.Response.AziendaAssociataResponse;
-import com.salvio.Response.DipendentiAziendaResponse;
+import com.salvio.response.AziendaAssociataResponse;
+import com.salvio.response.DipendentiAziendaResponse;
 import com.salvio.StartApplication;
-import com.salvio.persistor.AziendaPersistor;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

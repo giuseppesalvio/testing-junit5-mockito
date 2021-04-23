@@ -1,4 +1,4 @@
-package com.salvio.DomainObjects;
+package com.salvio.domain.objects;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

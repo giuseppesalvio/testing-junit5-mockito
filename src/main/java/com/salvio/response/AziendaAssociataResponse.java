@@ -1,4 +1,4 @@
-package com.salvio.Response;
+package com.salvio.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

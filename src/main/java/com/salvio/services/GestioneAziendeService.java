@@ -1,6 +1,6 @@
 package com.salvio.services;
 
-import com.salvio.Response.DipendentiAziendaResponse;
+import com.salvio.response.DipendentiAziendaResponse;
 import com.salvio.entitys.AnagraficaAzienda;
 import com.salvio.entitys.Dipendente;
 import com.salvio.repository.GestioneAnagraficheRepository;

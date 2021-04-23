@@ -1,7 +1,7 @@
 package com.salvio.repository;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.PolizzaDomain;
-import com.salvio.entitys.Polizza;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.PolizzaDomain;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

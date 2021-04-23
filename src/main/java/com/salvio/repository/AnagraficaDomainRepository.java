@@ -1,7 +1,6 @@
 package com.salvio.repository;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.AnagraficaDomain;
-import com.salvio.entitys.Anagrafica;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.AnagraficaDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

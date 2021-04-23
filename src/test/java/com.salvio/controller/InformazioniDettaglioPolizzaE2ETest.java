@@ -53,7 +53,8 @@ public class InformazioniDettaglioPolizzaE2ETest {
     inserisciPolizzaProva(jdbcTemplate,new PolizzaProva(3, 2222, 2222, 8888));
 
     ResultActions resultActions = mvc
-        .perform(post("/get-informazioni-dettaglio-polizza").content(anagraficaProva.getCodiceFiscale()))
+        .perform(post("/get-informazioni-dettaglio-polizza")
+                .content(anagraficaProva.getCodiceFiscale()))
         .andExpect(status().isOk());
 
     List<DettaglioPolizzaProva> listaDettaglioPolizzaProva = getDettaglioPolizzaProva(resultActions);

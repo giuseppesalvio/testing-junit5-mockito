@@ -1,4 +1,4 @@
-package com.salvio.Adapters;
+package com.salvio.adapters;
 
 import com.salvio.entitys.HexagonalPolizza;
 import java.util.List;

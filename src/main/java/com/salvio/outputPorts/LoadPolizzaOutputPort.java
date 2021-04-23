@@ -1,6 +1,6 @@
 package com.salvio.outputPorts;
 
-import com.salvio.DomainObjects.DettaglioPolizzaDomain.PolizzaDomain;
+import com.salvio.domain.objects.DettaglioPolizzaDomain.PolizzaDomain;
 import java.util.List;
 
 public interface LoadPolizzaOutputPort {
