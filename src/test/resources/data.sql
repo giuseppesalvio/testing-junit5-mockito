@@ -146,4 +146,21 @@ create table AnagraficaAziende(
 
 );
 
+create table ProdottoSupermercato(
 
+
+                codiceProdotto nchar(10) primary key,
+                nomeProdotto nchar(15),
+                costoProdotto double,
+                provenienzaProdotto nchar(20),
+                scadenzaProdotto nchar(10),
+                categoriaProdotto nchar(15)
+);
+
+
+create table InfoMagazzinoSupermercato(
+
+    codiceProdotto nchar(10) primary key,
+    disponibilita int
+
+);
