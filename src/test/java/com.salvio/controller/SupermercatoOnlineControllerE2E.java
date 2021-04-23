@@ -11,6 +11,7 @@ import com.salvio.StartApplication;
 import com.salvio.entitys.ProdottoInfoBase;
 import com.salvio.entitys.ProdottoInfoBaseProva;
 import com.salvio.entitys.ProdottoInfoCompletaProva;
+import com.salvio.entitys.ProdottoInfoEstesaProva;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +63,13 @@ public class SupermercatoOnlineControllerE2E {
     ResultActions resultActionsGetBy = mvc.perform(post("/getBy").content(codiceProdotto)).andDo(print()).andExpect(status().isOk());
     String rispostaGetBy= resultActionsGetBy.andReturn().getResponse().getContentAsString();
 
- /*   ResultActions resultActionsOrder=  mvc.perform(post("/getAscOrderBy").param(parametroOrdinamento)).andDo(print()).andExpect(status().isOk());
-    String resultGetOrder = resultActionsOrder.andReturn().getResponse().getContentAsString();*/
+    ResultActions resultActionsOrder=  mvc.perform(post("/getAscOrderBy").content(parametroOrdinamento)).andDo(print()).andExpect(status().isOk());
+    String resultGetOrder = resultActionsOrder.andReturn().getResponse().getContentAsString();
 
-   // ResultActions resultActionFromCategoria=  mvc.perform(post("/getAllFilterBy").param(categoriaRichiesta)).andDo(print()).andExpect(status().isOk());
+   ResultActions resultActionFromCategoria=  mvc.perform(post("/getAllFilterBy").content(categoriaRichiesta)).andDo(print()).andExpect(status().isOk());
+    String resultGetFilterBy = resultActionFromCategoria.andReturn().getResponse().getContentAsString();
+
+
 
     //deserializzazione risposte
     Gson gson = new Gson();
@@ -77,17 +81,23 @@ public class SupermercatoOnlineControllerE2E {
     //singolo Oggetto
     ProdottoInfoCompletaProva infoProdottoCercato=gson.fromJson(rispostaGetBy,ProdottoInfoCompletaProva.class);
 
-   /* Type listaProdottiInfoBaseOrdinata= new TypeToken<ArrayList<ProdottoInfoBase>>() {}.getType();
-    List<ProdottoInfoBase> listaProdottiBaseOrdinata= gson.fromJson(resultGetOrder,listaProdottiInfoBaseOrdinata);
-*/
+    Type listaProdottiInfoBaseOrdinata= new TypeToken<ArrayList<ProdottoInfoBaseProva>>() {}.getType();
+    List<ProdottoInfoBaseProva> listaProdottiBaseOrdinata= gson.fromJson(resultGetOrder,listaProdottiInfoBaseOrdinata);
+
+    Type listaProdottiInfoEstesa= new TypeToken<ArrayList<ProdottoInfoEstesaProva>>() {}.getType();
+    List<ProdottoInfoEstesaProva> listaProdottiEstesa= gson.fromJson(resultGetFilterBy,listaProdottiInfoEstesa);
 
 
 
     Assertions.assertThat(listaProdottiBaseOttenuta.size()).isEqualTo(5);
     Assertions.assertThat(infoProdottoCercato.getNomeProdotto()).isEqualTo("farina");
-   // Assertions.assertThat(listaProdottiBaseOrdinata.get(0).getNomeProdotto()).isEqualTo("acqua");
+   Assertions.assertThat(listaProdottiBaseOrdinata.get(0).getNomeProdotto()).isEqualTo("acqua");
+   Assertions.assertThat(listaProdottiEstesa.size()).isEqualTo(4);
+
 
   }
+
+
 
   public void inserisciDisponibilitaProdotto(JdbcTemplate jdbcTemplate,String codice,Integer disponibilita){
 
