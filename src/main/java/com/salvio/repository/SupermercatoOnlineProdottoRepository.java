@@ -43,4 +43,34 @@ public class SupermercatoOnlineProdottoRepository {
             )
     );
   }
+
+  public List<ProdottoSupermercatoProva> estraiOrdinatiPer(String parametroOrdinamento) {
+
+     return jdbcTemplate.query("select * from prodottoSupermercato order by "+ parametroOrdinamento ,
+        (rs, rowNum) ->
+            new ProdottoSupermercatoProva(
+                rs.getString("codiceProdotto"),
+                rs.getString("nomeProdotto"),
+                rs.getDouble("costoProdotto"),
+                rs.getString("provenienzaProdotto"),
+                rs.getString("scadenzaProdotto"),
+                rs.getString("categoriaProdotto")
+            )
+    );
+  }
+
+  public List<ProdottoSupermercatoProva> estraiFiltratiPer(String categoriaRichiesta) {
+
+    return jdbcTemplate.query("select * from prodottoSupermercato where categoriaProdotto=?", new Object[]{categoriaRichiesta},
+        (rs, rowNum) ->
+            new ProdottoSupermercatoProva(
+                rs.getString("codiceProdotto"),
+                rs.getString("nomeProdotto"),
+                rs.getDouble("costoProdotto"),
+                rs.getString("provenienzaProdotto"),
+                rs.getString("scadenzaProdotto"),
+                rs.getString("categoriaProdotto")
+            )
+    );
+  }
 }

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import com.salvio.entitys.InfoMagazzinoSupermercatoProva;
 import com.salvio.entitys.ProdottoInfoBaseProva;
 import com.salvio.entitys.ProdottoInfoCompletaProva;
+import com.salvio.entitys.ProdottoInfoEstesaProva;
 import com.salvio.entitys.ProdottoSupermercato;
 import com.salvio.entitys.ProdottoSupermercatoProva;
 import com.salvio.repository.SupermercatoOnlineMagazzinoRepository;
@@ -65,6 +66,45 @@ public class SupermercatoOnlineServiceUnitTest {
 
 
   }
+
+  @Test
+  public void funzionamentoServiceGetOrdinatiPer() {
+    String parametroOrdinamento="costoProdotto";
+
+    List<ProdottoSupermercatoProva> listaMock = new ArrayList<>();
+    inserisciProdottoSupermercatoALista(listaMock, "P0004", "acqua", 0.25, "ITALIA", "2025-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0001", "farina", 0.35, "ITALIA", "2021-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0003", "pasta", 0.55, "ITALIA", "2022-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0002", "latte", 0.60, "ITALIA", "2021-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0005", "pentola", 5.00, "GERMANIA", null, "cucina");
+
+    when(supermercatoOnlineProdottoRepository.estraiOrdinatiPer(parametroOrdinamento)).thenReturn(listaMock);
+
+    List<ProdottoInfoBaseProva> listaOrdinata =  supermercatoOnlineService.ottieniOrdinatiPer(parametroOrdinamento);
+
+    Assertions.assertThat(listaOrdinata.get(0).getNomeProdotto()).isEqualTo("acqua");
+
+  }
+
+  @Test
+  public void funzionamentoServiceGetFiltratiPer() {
+
+    String categoriaRichiesta="alimentare";
+
+    List<ProdottoSupermercatoProva> listaMock = new ArrayList<>();
+    inserisciProdottoSupermercatoALista(listaMock, "P0001", "farina", 0.35, "ITALIA", "2021-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0002", "latte", 0.60, "ITALIA", "2021-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0003", "pasta", 0.55, "ITALIA", "2022-12-31", "alimentare");
+    inserisciProdottoSupermercatoALista(listaMock, "P0004", "acqua", 0.25, "ITALIA", "2025-12-31", "alimentare");
+
+    when(supermercatoOnlineProdottoRepository.estraiFiltratiPer(categoriaRichiesta)).thenReturn(listaMock);
+
+    List<ProdottoInfoEstesaProva> listaFiltrata= supermercatoOnlineService.ottieniFiltratiPer(categoriaRichiesta);
+
+
+    Assertions.assertThat(listaFiltrata.size()).isEqualTo(4);
+  }
+
 
 
   public void inserisciProdottoSupermercatoALista(List<ProdottoSupermercatoProva> lista, String codice, String nome, Double costo,

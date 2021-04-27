@@ -27,6 +27,9 @@ public class SupermercatoOnlineRepositoryIntegrationTest {
   @Test
   public void funzionamentoProdottoRepoOk(){
     String codiceProdotto="P0001";
+    String parametroOrdinamento="costoProdotto";
+    String categoriaRichiesta="alimentare";
+
     inserisciProdottoSupermercato(jdbcTemplate, "P0001", "farina", 0.35, "ITALIA","2021-12-31","alimentare");
     inserisciProdottoSupermercato(jdbcTemplate, "P0002", "latte", 0.60, "ITALIA","2021-12-31","alimentare");
     inserisciProdottoSupermercato(jdbcTemplate, "P0003", "pasta", 0.55, "ITALIA","2022-12-31","alimentare");
@@ -37,8 +40,14 @@ public class SupermercatoOnlineRepositoryIntegrationTest {
 
     ProdottoSupermercatoProva prodottoRestituito= supermercatoOnlineProdottoRepository.estraiTramite(codiceProdotto);
 
+    List<ProdottoSupermercatoProva> listaOrdinata= supermercatoOnlineProdottoRepository.estraiOrdinatiPer(parametroOrdinamento);
+
+    List<ProdottoSupermercatoProva> listaFiltrata= supermercatoOnlineProdottoRepository.estraiFiltratiPer(categoriaRichiesta);
+
     Assertions.assertThat(listaAll.size()).isEqualTo(5);
     Assertions.assertThat(prodottoRestituito.getNomeProdotto()).isEqualTo("farina");
+    Assertions.assertThat(listaOrdinata.get(0).getNomeProdotto()).isEqualTo("acqua");
+    Assertions.assertThat(listaFiltrata.size()).isEqualTo(4);
 
   }
 
@@ -55,7 +64,6 @@ public class SupermercatoOnlineRepositoryIntegrationTest {
 
     Assertions.assertThat(infoDispobilitaProdotto.getDisponibilita()).isEqualTo(100);
   }
-
 
 
 
