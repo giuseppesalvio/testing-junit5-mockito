@@ -212,10 +212,52 @@ create table MagazzinoProdottiDB
 (
 
 
-    idSupermercato   int ,
-    codiceProdotto   int,
-    nomeProdotto nchar(20),
-    costoUnitario            double,
-    disponibilita    int
+    idSupermercato int,
+    codiceProdotto int,
+    nomeProdotto   nchar(20),
+    costoUnitario  double,
+    disponibilita  int
 
 );
+
+
+
+create table AziendaDB
+(
+
+    pIvaAzienda               int primary key,
+    codiceFiscaleProprietario nchar(10),
+    nomeAzienda               nchar(20),
+    nazione                   nchar(20),
+    dataFondazione            date
+
+);
+
+create table DipendenteDB
+(
+
+    pIvaAzienda    int,
+    codiceFiscale  nchar(10),
+    nome           nchar(20),
+    cognome        nchar(20),
+    ruolo          nchar(20),
+    stipendio      double,
+    dataAssunzione date
+
+);
+
+
+
+create table personaTestDB
+(
+    id            int primary key,
+    nome          nchar(25),
+    cognome       nchar(25),
+    codiceFiscale nchar(16),
+    indirizzo     nchar(20),
+    sesso         nchar(1)
+);
+
+
+
+
