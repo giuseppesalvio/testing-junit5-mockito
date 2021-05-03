@@ -6,6 +6,22 @@ CREATE TABLE UTENTE
     codiceFiscale NCHAR(20)
 );
 
+CREATE TABLE POLIZZA_UTENTE
+(
+    id            INT PRIMARY KEY,
+    numeroPolizza NCHAR(20),
+    utente_id       INT
+);
+
+
+//recupera tutte le polizze dell'utente tramite codicefiscale
+//recupera utente prendendo in input il numero di polizza.
+
+
+
+
+
+
 
 CREATE TABLE ANAGRAFICA
 (

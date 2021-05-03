@@ -27,13 +27,11 @@ class UtenteControllerTest {
 
     @Test
     void recupaUtenteByCodiceFiscale() {
-
         when(utenteRepository.estrai("marioCodiceFiscale")).thenReturn(new Utente(1,"mario","rossi","marioCodiceFiscale"));
 
         UtenteFE utenteFe = utenteController.recupaUtenteByCodiceFiscale("marioCodiceFiscale");
 
         UtenteFE expected = new UtenteFE("mario","rossi");
         Assertions.assertThat(utenteFe).isEqualToComparingFieldByField(expected);
-
     }
 }
