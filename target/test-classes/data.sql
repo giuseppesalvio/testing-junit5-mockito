@@ -1,3 +1,12 @@
+CREATE TABLE UTENTE
+(
+    id            INT PRIMARY KEY,
+    nome          NCHAR(20),
+    cognome       NCHAR(20),
+    codiceFiscale NCHAR(20)
+);
+
+
 CREATE TABLE ANAGRAFICA
 (
     id            INT PRIMARY KEY,
