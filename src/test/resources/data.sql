@@ -18,11 +18,6 @@ CREATE TABLE POLIZZA_UTENTE
 //recupera utente prendendo in input il numero di polizza.
 
 
-
-
-
-
-
 CREATE TABLE ANAGRAFICA
 (
     id            INT PRIMARY KEY,
