@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = StartApplication.class)
-class PolizzaUtenteRepositoryTest {
-//todo  POSSO COPIARE INCOLLARE UN REPOSITORY INTERO E POI MODIFICARE? E STESSA COSA PER LE ALTRE CLASSI
-// TODO PRENDENDO
+class RepositoryPolizzeUtenteTest {
+    //todo  POSSO COPIARE INCOLLARE UN REPOSITORY INTERO E POI MODIFICARE? E STESSA COSA PER LE ALTRE CLASSI
+    // TODO PRENDENDO
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -34,3 +34,4 @@ class PolizzaUtenteRepositoryTest {
                 new PolizzaUtente(Long.valueOf(1),"123",Long.valueOf(1)));
     }
 }
+

@@ -3,7 +3,6 @@ package com.roberto.controller;
 import com.roberto.entitys.PolizzaUtente;
 import com.roberto.models.PolizzeUtenteFE;
 import com.roberto.repository.RepositoryPolizzeUtente;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/utente")
 public class PolizzeUtenteController
 {
-    @Autowired
-    RepositoryPolizzeUtente repositoryPolizzeUtente;
+    final RepositoryPolizzeUtente repositoryPolizzeUtente;
+
+    public PolizzeUtenteController(RepositoryPolizzeUtente repositoryPolizzeUtente) {
+        this.repositoryPolizzeUtente = repositoryPolizzeUtente;
+    }
 
     @GetMapping("/polizzaUtenteByFc")
     public PolizzeUtenteFE getPolizzeUtenteByFiscalCode(@Param("codiceFiscale") String codiceFiscale)
