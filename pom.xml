@@ -99,7 +99,21 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arca.oracle.jdbc</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.0.2.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,5 +132,19 @@
         </plugins>
     </build>
 
+
+    <repositories>
+        <repository>
+            <id>arca-release</id>
+            <url>http://nexus01:8083/nexus/content/repositories/release/</url>
+        </repository>
+        <repository>
+            <id>arca-snapshot</id>
+            <url>http://nexus01:8083/nexus/content/repositories/snapshot/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

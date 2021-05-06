@@ -7,9 +7,19 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="arca-snapshot" />
+      <option name="name" value="arca-snapshot" />
+      <option name="url" value="http://nexus01:8083/nexus/content/repositories/snapshot/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="arca-release" />
+      <option name="name" value="arca-release" />
+      <option name="url" value="http://nexus01:8083/nexus/content/repositories/release/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jboss.community" />
