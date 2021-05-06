@@ -1,9 +1,8 @@
-CREATE TABLE UTENTE
+CREATE TABLE BOOK
 (
-    id            INT PRIMARY KEY,
-    nome          NCHAR(20),
-    cognome       NCHAR(20),
-    codiceFiscale NCHAR(20)
+    title            NCHAR(20),
+    author          NCHAR(20),
+    price       FLOAT
 );
 
 CREATE TABLE POLIZZA_UTENTE
