@@ -1,27 +1,30 @@
 package com.service;
 
-import static com.entity.Book.writeBook;
-import static com.entity.Book.writeHeaderBook;
 import static com.entity.StatisticheAccesso.writeHeaderStatisticheAccesso;
 import static com.entity.StatisticheAccesso.writeStatisticheAccesso;
 
-import com.entity.Book;
+import com.arca.repository.StatisticheAccessoRepository;
 import com.entity.StatisticheAccesso;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExcelStatisticheAccesso {
-    public void writeExcel(List<StatisticheAccesso> list, String excelFilePath) throws IOException {
+public class ExcelStatisticheAccesso
+{
+    final StatisticheAccessoRepository statisticheAccessoRepository;
+
+    public ExcelStatisticheAccesso(StatisticheAccessoRepository statisticheAccessoRepository) {
+        this.statisticheAccessoRepository = statisticheAccessoRepository;
+    }
+
+    public void writeExcel(List<StatisticheAccesso> list, String excelFilePath) throws IOException
+    {
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet();
 
@@ -37,6 +40,22 @@ public class ExcelStatisticheAccesso {
 
         try (FileOutputStream outputStream = new FileOutputStream(excelFilePath)) {
             workbook.write(outputStream);
+        }
+    }
+
+    public void execute()
+    {
+        ExcelStatisticheAccesso excelStatisticheAccesso = new ExcelStatisticheAccesso(statisticheAccessoRepository);
+
+        List<StatisticheAccesso> list = statisticheAccessoRepository.retrive();
+
+
+        String excelFilePath = "NiceJavaBooks.xls";
+
+        try {
+            excelStatisticheAccesso.writeExcel(list, excelFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
