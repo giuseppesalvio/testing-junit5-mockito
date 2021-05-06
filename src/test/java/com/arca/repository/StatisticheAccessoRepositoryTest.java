@@ -11,8 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@ActiveProfiles("dev")
+@SpringBootTest(classes = {StartApplication.class})
 public class StatisticheAccessoRepositoryTest
 {
 
@@ -22,7 +21,7 @@ public class StatisticheAccessoRepositoryTest
     @Test
     public void statisticheAccessRepository()
     {
-        jdbcTemplate.update("insert into POLIZZA_UTENTE(id,numeropolizza,utente_id) values (9,'tstnumpol',25)");
+        jdbcTemplate.update("insert into POLIZZA_UTENTE (id,numeroPolizza,utente_id) values (9,'tstnumpol',25)");
 
 
     }
