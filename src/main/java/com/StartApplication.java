@@ -1,8 +1,11 @@
 package com;
 
 import com.arca.repository.BookRepository;
+import com.arca.repository.StatisticheAccessoRepository;
 import com.entity.Book;
+import com.entity.StatisticheAccesso;
 import com.service.ExcelBook;
+import com.service.ExcelStatisticheAccesso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -21,7 +24,7 @@ import java.util.List;
 public class StartApplication {
 
     @Autowired
-    public BookRepository bookRepository;
+    public StatisticheAccessoRepository statisticheAccessoRepository;
 
     public static void main(String[] args) {
 
@@ -32,7 +35,7 @@ public class StartApplication {
     public void doSomethingAfterStartup() {
 
 
-        ExcelBook excelBook = new ExcelBook();
+        ExcelStatisticheAccesso excelStatisticheAccesso = new ExcelStatisticheAccesso();
 
 //        List<Book> bookList = new ArrayList<>();
 //        bookList.add(new Book("Head First Java", "Kathy Serria", 79));
@@ -41,11 +44,11 @@ public class StartApplication {
 //        bookList.add(new Book("Thinking in Java", "Bruce Eckel", 35));
 
 
-        List<Book> bookList = bookRepository.retrive();
+        List<StatisticheAccesso> list = statisticheAccessoRepository.retrive();
         String excelFilePath = "NiceJavaBooks.xls";
 
         try {
-            excelBook.writeExcel(bookList, excelFilePath);
+            excelStatisticheAccesso.writeExcel(list, excelFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
