@@ -1,5 +1,6 @@
 package com.arca.component;
 
+import static com.arca.component.CreaExcel.CONTEGGIO_ACCESSI;
 import static com.arca.entity.ConteggioAccessi.writeConteggioAccessi;
 import static com.arca.entity.ConteggioAccessi.writeHeaderConteggioAccessi;
 import static com.arca.model.StatisticheAccessoBS.writeHeaderStatisticheAccesso;
@@ -24,17 +25,7 @@ public class Writer {
 
   public void write(String nomeSheet, List<ConteggioAccessi> valori) {
     Workbook workbook = new HSSFWorkbook();
-    Sheet sheet = workbook.createSheet();
-
-    int rowCount = 0;
-
-    Row rowHeader = sheet.createRow(0);
-    writeHeaderConteggioAccessi(rowHeader);
-
-    for (ConteggioAccessi temp : valori) {
-      Row row = sheet.createRow(++rowCount);
-      writeConteggioAccessi(temp, row);
-    }
+    creaSheetConteggioAccessi(valori, workbook);
 
     try (FileOutputStream outputStream = new FileOutputStream(NOME_FILE_EXCEL)) {
       workbook.write(outputStream);
@@ -44,6 +35,19 @@ public class Writer {
       e.printStackTrace();
     }
 
+  }
+
+  private void creaSheetConteggioAccessi(List<ConteggioAccessi> valori, Workbook workbook) {
+    Sheet sheet = workbook.createSheet(CONTEGGIO_ACCESSI);
+    int rowCount = 0;
+    Row rowHeader = sheet.createRow(rowCount);
+
+    writeHeaderConteggioAccessi(rowHeader);
+
+    for (ConteggioAccessi temp : valori) {
+      Row row = sheet.createRow(++rowCount);
+      writeConteggioAccessi(temp, row);
+    }
   }
 
 }

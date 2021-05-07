@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest(classes = {StartApplication.class})
-class WriterTest {
+class WriterIntegrationTest {
 
   @Autowired
   JdbcTemplate jdbcTemplate;
@@ -40,7 +40,6 @@ class WriterTest {
 
   @Test
   public void scriveSheetConIntestazioneAndDati() throws IOException {
-
 
     File directory = new File(DIR_CORRENTE);
     File child = new File(NOME_FILE_EXCEL);
