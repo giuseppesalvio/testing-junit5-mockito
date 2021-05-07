@@ -63,7 +63,6 @@ public class ExcelStatisticheAccessoComponent
         cell.setCellValue("conteggioAccessi");
     }
 
-
     public void execute()
     {
         List<StatisticheAccessoBS>list = statisticheAccessoService.getStatisticheAccessoSso();

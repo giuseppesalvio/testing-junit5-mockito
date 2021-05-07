@@ -27,21 +27,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.6</version>
-        </dependency>
-
-        <!-- jsonObject -->
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-
-
         <!-- exclude junit 4 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -62,23 +47,6 @@
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- mockito + junit 5 -->
-        <!-- exclude this, mockito still ok with junit 5, why need this? -->
-        <!--
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -94,24 +62,17 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.0.0</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.arca.oracle.jdbc</groupId>-->
-<!--            <artifactId>ojdbc14</artifactId>-->
-<!--            <version>10.0.2.5</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
@@ -119,15 +80,19 @@
             <version>19.6.0.0</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -136,19 +101,5 @@
 
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>arca-release</id>
-            <url>http://nexus01:8083/nexus/content/repositories/release/</url>
-        </repository>
-        <repository>
-            <id>arca-snapshot</id>
-            <url>http://nexus01:8083/nexus/content/repositories/snapshot/</url>
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>
