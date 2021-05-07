@@ -5,9 +5,31 @@ CREATE TABLE BOOK
     price       FLOAT
 );
 
-CREATE TABLE POLIZZA_UTENTE
-(
-    id INT PRIMARY KEY,
-    numeroPolizza NCHAR(20),
-    utente_id INT
+create table STATISTICHE_ACCESSO (
+                                     ID_ACCESSO      number(15, 0) not null enable,
+                                     CF              varchar2(16 char),
+                                     USERNAME        varchar2(30 char),
+                                     STATO           varchar2(40 char),
+                                     FLG_ACCESSO_SSO varchar2(1 char),
+                                     BANCA_SSO       varchar2(10 char),
+                                     TMST_ACCESSO    timestamp(3) not null enable,
+                                     DISPOSITIVO     varchar2(50 char)
+);
+
+create table STATISTICHE_REGISTRAZIONE (
+                                           CF               varchar2(16 char),
+                                           TIPO_POLIZZA_REG varchar2(10 char),
+                                           STATO            varchar2(40 char),
+                                           TMST_REG         timestamp(3) not null ENABLE,
+                                           ORIG             varchar2(10 char),
+                                           OPERAZIONE       varchar2(25 char),
+                                           constraint STATISTICHE_REGISTRAZIONE_PK primary key (CF, TMST_REG)
+);
+
+create table STATISTICHE (
+                             CF  varchar2(20 char) not null,
+                             AZIONE varchar2(50 char) default null,
+                             TMST_DOWNLOAD timestamp(6) default null,
+                             TARGA varchar2(21 char) default null,
+                             POLIZZA varchar2(21 char) default null
 );

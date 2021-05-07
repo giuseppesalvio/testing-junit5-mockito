@@ -1,6 +1,6 @@
-package com.service;
+package com.arca.component;
 
-import com.entity.Book;
+import com.arca.entity.Book;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,8 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import static com.entity.Book.writeBook;
-import static com.entity.Book.writeHeaderBook;
+import static com.arca.entity.Book.writeBook;
+import static com.arca.entity.Book.writeHeaderBook;
 
 @Component
 public class ExcelBook {

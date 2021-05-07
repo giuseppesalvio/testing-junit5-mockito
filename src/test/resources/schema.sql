@@ -25,3 +25,11 @@ create table STATISTICHE_REGISTRAZIONE (
                                            OPERAZIONE       varchar2(25 char),
                                            constraint STATISTICHE_REGISTRAZIONE_PK primary key (CF, TMST_REG)
 );
+
+create table STATISTICHE (
+                             CF  varchar2(20 char) not null,
+                             AZIONE varchar2(50 char) default null,
+                             TMST_DOWNLOAD timestamp(6) default null,
+                             TARGA varchar2(21 char) default null,
+                             POLIZZA varchar2(21 char) default null
+);

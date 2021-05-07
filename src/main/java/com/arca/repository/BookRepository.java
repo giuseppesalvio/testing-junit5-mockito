@@ -1,7 +1,6 @@
 package com.arca.repository;
 
-import com.entity.Book;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import com.arca.entity.Book;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
