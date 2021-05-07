@@ -1,31 +1,37 @@
 package com.arca.component;
 
-import static com.arca.component.CreaExcel.CONTEGGIO_ACCESSI;
-import static com.arca.entity.ConteggioAccessi.writeConteggioAccessi;
-import static com.arca.entity.ConteggioAccessi.writeHeaderConteggioAccessi;
-import static com.arca.model.StatisticheAccessoBS.writeHeaderStatisticheAccesso;
-import static com.arca.model.StatisticheAccessoBS.writeStatisticheAccesso;
-
-import com.arca.entity.ConteggioAccessi;
-import com.arca.model.StatisticheAccessoBS;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Writer {
+  final ConteggioAccessiSheet conteggioAccessiSheet;
+  final StatisticheAccessoSheet statisticheAccessoSheet;
+  final DocumentoScaricatoGiornalmenteSheet documentoScaricatoGiornalmenteSheet;
+  final DocumentoScaricatoTotalmenteSheet documentoScaricatoTotalmenteSheet;
+
+  public Writer(ConteggioAccessiSheet conteggioAccessiSheet, StatisticheAccessoSheet statisticheAccessoSheet, DocumentoScaricatoGiornalmenteSheet documentoScaricatoGiornalmenteSheet, DocumentoScaricatoTotalmenteSheet documentoScaricatoTotalmenteSheet) {
+    this.conteggioAccessiSheet = conteggioAccessiSheet;
+    this.statisticheAccessoSheet = statisticheAccessoSheet;
+    this.documentoScaricatoGiornalmenteSheet = documentoScaricatoGiornalmenteSheet;
+    this.documentoScaricatoTotalmenteSheet = documentoScaricatoTotalmenteSheet;
+  }
 
   public static final String NOME_FILE_EXCEL = "fileExcel.xls";
 
-  public void write(String nomeSheet, List<ConteggioAccessi> valori) {
+
+  public void write() {
     Workbook workbook = new HSSFWorkbook();
-    creaSheetConteggioAccessi(valori, workbook);
+
+    conteggioAccessiSheet.creaSheet(workbook);
+    statisticheAccessoSheet.creaSheet(workbook);
+    documentoScaricatoGiornalmenteSheet.creaSheet(workbook);
+    documentoScaricatoTotalmenteSheet.creaSheet(workbook);
 
     try (FileOutputStream outputStream = new FileOutputStream(NOME_FILE_EXCEL)) {
       workbook.write(outputStream);
@@ -37,17 +43,6 @@ public class Writer {
 
   }
 
-  private void creaSheetConteggioAccessi(List<ConteggioAccessi> valori, Workbook workbook) {
-    Sheet sheet = workbook.createSheet(CONTEGGIO_ACCESSI);
-    int rowCount = 0;
-    Row rowHeader = sheet.createRow(rowCount);
 
-    writeHeaderConteggioAccessi(rowHeader);
-
-    for (ConteggioAccessi temp : valori) {
-      Row row = sheet.createRow(++rowCount);
-      writeConteggioAccessi(temp, row);
-    }
-  }
 
 }

@@ -1,6 +1,5 @@
 package com.arca.component;
 
-import static com.arca.component.CreaExcel.CONTEGGIO_ACCESSI;
 import static com.arca.component.Writer.NOME_FILE_EXCEL;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -24,6 +23,9 @@ class WriterIntegrationTest {
   @Autowired
   JdbcTemplate jdbcTemplate;
 
+  @Autowired
+  Writer writer;
+
   public static final String DIR_CORRENTE = "./";
 
   @Test
@@ -32,8 +34,7 @@ class WriterIntegrationTest {
     File child = new File(NOME_FILE_EXCEL);
     cancellaFileSeEsisteGia(directory, child);
 
-    Writer writer = new Writer();
-    writer.write(CONTEGGIO_ACCESSI, emptyList());
+    writer.write();
 
     assertThat(directoryContains(directory,child)).isTrue();
   }
@@ -45,19 +46,34 @@ class WriterIntegrationTest {
     File child = new File(NOME_FILE_EXCEL);
     cancellaFileSeEsisteGia(directory, child);
 
+    jdbcTemplate.update("insert into STATISTICHE_ACCESSO (ID_ACCESSO,CF,USERNAME,STATO,FLG_ACCESSO_SSO,BANCA_SSO,TMST_ACCESSO,DISPOSITIVO) values ('16156','VSNLCA66B58L781P','aliceavesani','STATO_UTENTE_ATTIVO','S','Sondrio',TO_TIMESTAMP('29-APR-21 16:58:29,000000000','DD-MON-RR HH24:MI:SSXFF'),'desktop')");
+    jdbcTemplate.update("insert into STATISTICHE_ACCESSO (ID_ACCESSO,CF,USERNAME,STATO,FLG_ACCESSO_SSO,BANCA_SSO,TMST_ACCESSO,DISPOSITIVO) values ('16157','VSNLCA66B58L781P','aliceavesani','STATO_UTENTE_ATTIVO','S','Sondrio',TO_TIMESTAMP('28-APR-21 16:58:29,000000000','DD-MON-RR HH24:MI:SSXFF'),'desktop')");
 
-    Writer writer = new Writer();
-    List<ConteggioAccessi> lista = asList(
-        new ConteggioAccessi("02/02/2001",1,11),
-        new ConteggioAccessi("02/02/2002",2,22),
-        new ConteggioAccessi("02/02/2003",3,33),
-        new ConteggioAccessi("02/02/2004",4,44)
-    );
-
-    writer.write(CONTEGGIO_ACCESSI, lista);
+    writer.write();
 
     assertThat(directoryContains(directory,child)).isTrue();
   }
+
+  @Test
+  public void scrive2Sheet() throws IOException {
+
+    File directory = new File(DIR_CORRENTE);
+    File child = new File(NOME_FILE_EXCEL);
+    cancellaFileSeEsisteGia(directory, child);
+
+    jdbcTemplate.update("insert into STATISTICHE_ACCESSO (ID_ACCESSO,CF,USERNAME,STATO,FLG_ACCESSO_SSO,BANCA_SSO,TMST_ACCESSO,DISPOSITIVO) values ('16156','VSNLCA66B58L781P','aliceavesani','STATO_UTENTE_ATTIVO','S','Sondrio',TO_TIMESTAMP('29-APR-21 16:58:29,000000000','DD-MON-RR HH24:MI:SSXFF'),'desktop')");
+    jdbcTemplate.update("insert into STATISTICHE_ACCESSO (ID_ACCESSO,CF,USERNAME,STATO,FLG_ACCESSO_SSO,BANCA_SSO,TMST_ACCESSO,DISPOSITIVO) values ('16157','VSNLCA66B58L781P','aliceavesani','STATO_UTENTE_ATTIVO','S','Sondrio',TO_TIMESTAMP('28-APR-21 16:58:29,000000000','DD-MON-RR HH24:MI:SSXFF'),'desktop')");
+
+    writer.write();
+
+    assertThat(directoryContains(directory,child)).isTrue();
+  }
+
+
+
+
+
+
 
   private void cancellaFileSeEsisteGia(File directory, File child) throws IOException {
     boolean fileExcel = directoryContains(directory, child);
@@ -65,6 +81,7 @@ class WriterIntegrationTest {
       FileUtils.forceDelete(new File(DIR_CORRENTE + NOME_FILE_EXCEL));
     }
   }
+
 
 
 
