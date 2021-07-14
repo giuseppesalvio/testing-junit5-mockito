@@ -15,8 +15,8 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <junit-jupiter.version>5.3.2</junit-jupiter.version>
-        <mockito.version>2.24.0</mockito.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <mockito.version>3.11.0</mockito.version>
     </properties>
 
 
@@ -71,14 +71,14 @@
 
         <!-- mockito + junit 5 -->
         <!-- exclude this, mockito still ok with junit 5, why need this? -->
-        <!--
+        
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-        -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
